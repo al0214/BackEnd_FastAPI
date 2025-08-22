@@ -16,12 +16,18 @@ dependencies = [
     "httpx (>=0.28.1,<0.29.0)",
     "jinja2 (>=3.1.6,<4.0.0)",
     "python-multipart (>=0.0.20,<0.0.21)",
-    "pydantic[email] (>=2.11.7,<3.0.0)"
+    "pydantic[email] (>=2.11.7,<3.0.0)",
+    "sqlmodel[mysql] (>=0.0.24,<0.0.25)",
+    "pymysql (>=1.1.1,<2.0.0)",
+    "cryptography (>=45.0.6,<46.0.0)",
 ]
 
 [tool.poetry]
 packages = [{include = "eventplanner", from = "src"}]
 
+
+[tool.poetry.group.dev.dependencies]
+sqlmodel = "^0.0.24"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
