@@ -6,28 +6,21 @@ authors = [
     {name = "al0214",email = "sisang951@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.11, <4.0"
 dependencies = [
-    "fastapi (>=0.116.1,<0.117.0)",
-    "uvicorn (>=0.35.0,<0.36.0)",
-    "pytest (>=8.4.1,<9.0.0)",
-    "httpie (>=3.2.4,<4.0.0)",
-    "requests (>=2.32.4,<3.0.0)",
-    "httpx (>=0.28.1,<0.29.0)",
-    "jinja2 (>=3.1.6,<4.0.0)",
-    "python-multipart (>=0.0.20,<0.0.21)",
-    "pydantic[email] (>=2.11.7,<3.0.0)",
-    "sqlmodel[mysql] (>=0.0.24,<0.0.25)",
-    "pymysql (>=1.1.1,<2.0.0)",
-    "cryptography (>=45.0.6,<46.0.0)",
 ]
 
 [tool.poetry]
-packages = [{include = "eventplanner", from = "src"}]
+packages = [{include = "src"}]
 
+[tool.poetry.group.sqlEnv.dependencies]
+python-multipart = ">=0.0.20,<0.0.21"
+pydantic = { version = ">=2.11.7,<3.0.0", extras = ["email"] }
 
-[tool.poetry.group.dev.dependencies]
-sqlmodel = "^0.0.24"
+[tool.poetry.group.mongoEnv.dependencies]
+beanie = ">=2.0.0"
+motor = ">=3.7.1,<4.0.0"
+
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

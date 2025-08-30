@@ -1,14 +1,13 @@
+from beanie import Document
 from pydantic import BaseModel, ConfigDict
 from typing import List, Optional
-from sqlmodel import JSON, SQLModel, Field, Column
 
 # SQL을 사용한 이벤트 처리용 모델을 정의
-class Event(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    title: str
-    image: str
-    description: str
-    tags: List[str] = Field(sa_column=Column(JSON))
+class Event(Document):
+    title : str
+    image : str
+    description : str
+    tags: List[str]
     location: str
     
     model_config = ConfigDict(arbitrary_types_allowed = True,
@@ -25,6 +24,8 @@ class Event(SQLModel, table=True):
             }
         
     )
+    class Settings:
+                name = "events"
 
 # # 이벤트 처리용 모델을 정의
 # class Event(BaseModel):
@@ -48,15 +49,15 @@ class Event(SQLModel, table=True):
 #         }
 #     }
 
-class EventUpdate(SQLModel):
+class EventUpdate(BaseModel):
     title: Optional[str]
     image: Optional[str]
     description: Optional[str]
     tags: Optional[List[str]]
     location: Optional[str]
     
-    model_config = {
-         "json_schema_extra" : {
+    model_config = ConfigDict(
+         json_schema_extra = {
                 "example" : [
                     {
                     "title" : "FastAPI Book Launch",
@@ -67,4 +68,4 @@ class EventUpdate(SQLModel):
                     }
                             ]
             }
-    }
+    )
